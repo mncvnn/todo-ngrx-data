@@ -1,0 +1,40 @@
+<div class="Container">
+  <h2>My Todo List:</h2>
+
+  <div class="container form-group" style="margin: 10px;">
+    <h3>Create New Todo</h3>
+    <form (ngSubmit)="createToDo()">
+      <div class="row">
+        <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <input [(ngModel)]="title" placeholder="Enter your Wish" class="form-control" name="Title" />
+        </div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 form-check">
+          <input type="checkbox" class="form-check-input" id="completed" name="completed" [(ngModel)]="completed" />
+          <label for="completed" class="form-check-label">Completed?</label>
+        </div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <button type="submit" class="btn btn-primary">Add Todo</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <hr />
+
+  <div class="container" *ngIf="loading$ | async">
+    <div class="alert alert-danger" role="alert">
+      Still loading data ...
+    </div>
+  </div>
+
+  <ng-container *ngFor="let item of todo$ | async">
+    <div class="row">
+      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">Name: {{ item.title }}</div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <input type="checkbox" name="IsCompleted" id="IsCompleted" [checked]="item.completed">
+      </div>
+    </div>
+  </ng-container>
+</div>
